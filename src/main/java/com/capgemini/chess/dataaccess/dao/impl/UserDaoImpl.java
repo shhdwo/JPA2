@@ -25,6 +25,14 @@ public class UserDaoImpl implements UserDao {
 		dataSource.getUsers().put(id, entity);
 		return UserMapper.map(entity);
 	}
+	
+	@Override
+	public UserTO update(UserTO to) {
+		UserEntity entity = UserMapper.map(to);
+		long id = entity.getId();
+		dataSource.getUsers().put(id, entity);
+		return UserMapper.map(entity);
+	}
 
 	@Override
 	public UserTO findByEmail(String email) {

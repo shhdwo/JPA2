@@ -6,6 +6,8 @@ public interface UserDao {
 
 	UserTO save(UserTO user);
 
+	UserTO update(UserTO user);
+	
 	UserTO findByEmail(String email);
 
 	UserTO find(Long id);
