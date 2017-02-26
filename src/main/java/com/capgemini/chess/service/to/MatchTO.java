@@ -1,13 +1,13 @@
 package com.capgemini.chess.service.to;
 
-import com.capgemini.chess.enums.MatchResult;
+import com.capgemini.chess.enums.MatchWinner;
 
 public class MatchTO {
 	private Long player1;
 	private Long player2;
 	private int points1;
 	private int points2;
-	private MatchResult result;
+	private MatchWinner result;
 
 	public Long getPlayer1() {
 		return player1;
@@ -41,11 +41,11 @@ public class MatchTO {
 		this.points2 = points2;
 	}
 
-	public MatchResult getResult() {
+	public MatchWinner getResult() {
 		return result;
 	}
 
-	public void setResult(MatchResult result) {
+	public void setResult(MatchWinner result) {
 		this.result = result;
 	}
 
