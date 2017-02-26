@@ -10,5 +10,5 @@ public interface UserServiceFacade {
 	
 	UserTO update(UpdateTO to);
 	
-	UserTO showProfile(Long id);
+	UserTO showProfile(Long id); //TODO show profile
 }

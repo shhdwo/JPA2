@@ -15,7 +15,7 @@ public class UserUpdateServiceImpl implements UserUpdateService{
 	private UserDao userDao;
 
 	@Override
-	public UserTO update(UpdateTO to) {
+	public UserTO update(UpdateTO to) { //TODO pass and email validation
 		UserTO user = userDao.find(to.getId());
 		user.getProfile().setAboutMe(to.getAboutMe());
 		user.getProfile().setLifeMotto(to.getLifeMotto());

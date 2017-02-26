@@ -6,6 +6,15 @@ public class UserEntity {
 	private String email;
 	private String password;
 	private ProfileEntity profile;
+	private StatisticsEntity statistics;
+
+	public StatisticsEntity getStatistics() {
+		return statistics;
+	}
+
+	public void setStatistics(StatisticsEntity statistics) {
+		this.statistics = statistics;
+	}
 
 	public Long getId() {
 		return id;

@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.capgemini.chess.ChessApplication;
 import com.capgemini.chess.dataaccess.dao.UserDao;
 import com.capgemini.chess.service.to.RegistrationTO;
+import com.capgemini.chess.service.to.UpdateTO;
 import com.capgemini.chess.service.to.UserTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,6 +38,26 @@ public class UserServiceFacadeIntegrationTest {
 		Assert.assertEquals(registration.getName(), actual.getProfile().getName());
 		Assert.assertEquals(registration.getSurname(), actual.getProfile().getSurname());
 	}
+	
+	@Test
+	public void shouldUpdateUser() throws Exception {
+		// given
+		RegistrationTO registration = giveRegistrationTO();
+		UpdateTO update = giveUpdateTO();
+		service.register(registration);
+		
+		// when
+		UserTO user = service.update(update);
+		
+		// then
+		UserTO actual = dao.find(user.getId());
+		Assert.assertEquals(update.getAboutMe(), actual.getProfile().getAboutMe());
+		Assert.assertEquals(update.getLifeMotto(), actual.getProfile().getLifeMotto());
+		Assert.assertEquals(update.getName(), actual.getProfile().getName());
+		Assert.assertEquals(update.getSurname(), actual.getProfile().getSurname());
+		Assert.assertEquals(update.getEmail(), actual.getEmail());
+		Assert.assertEquals(update.getPassword(), actual.getPassword());
+	}
 
 	private RegistrationTO giveRegistrationTO() {
 		RegistrationTO to = new RegistrationTO();
@@ -44,6 +65,18 @@ public class UserServiceFacadeIntegrationTest {
 		to.setPassword("12345678");
 		to.setName("Name");
 		to.setSurname("Surname");
+		return to;
+	}
+	
+	private UpdateTO giveUpdateTO() {
+		UpdateTO to = new UpdateTO();
+		to.setId(new Long(1));
+		to.setAboutMe("I am master at chess");
+		to.setName("Major");
+		to.setSurname("Chessminator");
+		to.setLifeMotto("You have to be the best to be the best");
+		to.setEmail("chess@master.pl");
+		to.setPassword("12345678");
 		return to;
 	}
 

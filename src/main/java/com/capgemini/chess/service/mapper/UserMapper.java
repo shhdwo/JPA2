@@ -15,6 +15,7 @@ public class UserMapper {
 			to.setEmail(entity.getEmail());
 			to.setPassword(entity.getPassword());
 			to.setProfile(ProfileMapper.map(entity.getProfile()));
+			to.setStatistics(StatisticsMapper.map(entity.getStatistics()));
 			return to;
 		}
 		return null;
@@ -27,6 +28,7 @@ public class UserMapper {
 			entity.setEmail(to.getEmail());
 			entity.setPassword(to.getPassword());
 			entity.setProfile(ProfileMapper.map(to.getProfile()));
+			entity.setStatistics(StatisticsMapper.map(to.getStatistics()));
 			return entity;
 		}
 		return null;

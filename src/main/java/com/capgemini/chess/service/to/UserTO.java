@@ -6,6 +6,15 @@ public class UserTO {
 	private String email;
 	private String password;
 	private ProfileTO profile;
+	private StatisticsTO statistics;
+
+	public StatisticsTO getStatistics() {
+		return statistics;
+	}
+
+	public void setStatistics(StatisticsTO statistics) {
+		this.statistics = statistics;
+	}
 
 	public Long getId() {
 		return id;
