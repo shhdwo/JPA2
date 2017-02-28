@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import com.capgemini.chess.exception.UserValidationException;
 import com.capgemini.chess.service.UserRegistrationService;
 import com.capgemini.chess.service.UserServiceFacade;
+import com.capgemini.chess.service.UserShowService;
 import com.capgemini.chess.service.UserUpdateService;
 import com.capgemini.chess.service.to.RegistrationTO;
 import com.capgemini.chess.service.to.UpdateTO;
+import com.capgemini.chess.service.to.UserInfoTO;
 import com.capgemini.chess.service.to.UserTO;
 
 @Service
@@ -19,6 +21,9 @@ public class UserServiceFacadeImpl implements UserServiceFacade {
 	
 	@Autowired
 	private UserUpdateService updateService;
+	
+	@Autowired
+	private UserShowService showService;
 
 	@Override
 	public UserTO register(RegistrationTO to) throws UserValidationException {
@@ -31,8 +36,8 @@ public class UserServiceFacadeImpl implements UserServiceFacade {
 	}
 
 	@Override
-	public UserTO showProfile(Long id) {
-		return null;
+	public UserInfoTO show(Long id) {
+		return showService.showUser(id);
 	}
 
 }
