@@ -1,5 +1,8 @@
 package com.capgemini.chess.dataaccess.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +47,16 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public UserTO find(Long id) {
 		return UserMapper.map(dataSource.getUsers().get(id));
+	}
+	
+	@Override
+	public List<UserTO> findAll() {
+		Map<Long, UserEntity> entities = dataSource.getUsers();
+		List<UserEntity> entitiesList = new ArrayList<UserEntity>();
+		for (UserEntity ue : entities.values()) {
+			entitiesList.add(ue);
+		}
+		return UserMapper.map2TOs(entitiesList);
 	}
 
 	private long generateNextId() {

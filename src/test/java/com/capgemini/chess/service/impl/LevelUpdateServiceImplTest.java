@@ -31,9 +31,7 @@ public class LevelUpdateServiceImplTest {
 		// given
 		MatchTO match = giveMatch();
 		Mockito.when(userDao.find(13L)).thenReturn(giveUser1());
-		Mockito.when(userDao.update(giveUser1updated())).thenReturn(giveUser1updated());
 		Mockito.when(userDao.find(666L)).thenReturn(giveUser2());
-		Mockito.when(userDao.update(giveUser2updated())).thenReturn(giveUser2updated());
 		// when
 		Map<String, Level> updatedLvls = service.updateLevel(match);
 		Level expected1 = Level.WEAKLING;
@@ -66,14 +64,6 @@ public class LevelUpdateServiceImplTest {
 		return user;
 	}
 	
-	private UserTO giveUser1updated() {
-		UserTO user = giveUser1();
-		StatisticsTO stats = user.getStatistics();
-		stats.setPoints(1290);
-		user.setStatistics(stats);
-		return user;
-	}
-	
 	private UserTO giveUser2() {
 		UserTO user = new UserTO();
 		StatisticsTO stats = new StatisticsTO();
@@ -86,12 +76,5 @@ public class LevelUpdateServiceImplTest {
 		user.setId(666L);
 		return user;
 	}
-	
-	private UserTO giveUser2updated() {
-		UserTO user = giveUser2();
-		StatisticsTO stats = user.getStatistics();
-		stats.setPoints(9600);
-		user.setStatistics(stats);
-		return user;
-	}
+
 }
