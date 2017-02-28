@@ -71,9 +71,9 @@ public class UserShowServiceImplTest {
 		profile.setLifeMotto("I'm not trying to be sexy. It's just my way of expressing myself when I move around.");
 		StatisticsTO stats = new StatisticsTO();
 		stats.setId(2L);
-		stats.setLvl(Level.CHUCK_NORRIS_OF_CHESS);
+		stats.setLvl(Level.MASTER);
 		stats.setPoints(1234567);
-		stats.setPosition(1);
+		stats.setPosition(2);
 		stats.setGamesDrawn(1);
 		stats.setGamesLost(0);
 		stats.setGamesWon(9999);
@@ -82,15 +82,41 @@ public class UserShowServiceImplTest {
 		return user;
 	}
 	
+	private UserTO giveUser2() {
+		UserTO user = new UserTO();
+		user.setId(44L);
+		user.setEmail("bla@bla.pl");
+		user.setPassword("12345678");
+		ProfileTO profile = new ProfileTO();
+		profile.setId(2L);
+		profile.setName("Chuck");
+		profile.setSurname("Norris");
+		profile.setAboutMe("Im not playing chess. Its chess playing Chuck Norris.");
+		profile.setLifeMotto("There is no opponent you cant beat with roundhouse kick.");
+		StatisticsTO stats = new StatisticsTO();
+		stats.setId(1L);
+		stats.setLvl(Level.CHUCK_NORRIS_OF_CHESS);
+		stats.setPoints(2005670);
+		stats.setPosition(1);
+		stats.setGamesDrawn(1);
+		stats.setGamesLost(1);
+		stats.setGamesWon(555);
+		user.setProfile(profile);
+		user.setStatistics(stats);
+		return user;
+	}
+	
 	private List<UserTO> giveUsers() {
 		List<UserTO> ranking = new ArrayList<UserTO>();
 		ranking.add(giveUser());
+		ranking.add(giveUser2());
 		return ranking;
 	}
 	
 	private List<MatchTO> giveHistory() {
 		List<MatchTO> history = new ArrayList<MatchTO>();
 		history.add(giveMatch());
+		history.add(giveMatch2());
 		return history;
 	}
 	
@@ -101,6 +127,16 @@ public class UserShowServiceImplTest {
 		match.setResult(MatchWinner.PLAYER1);
 		match.setPoints1(1280);
 		match.setPoints2(-980);
+		return match;
+	}
+	
+	private MatchTO giveMatch2() {
+		MatchTO match = new MatchTO();
+		match.setPlayer1(13L);
+		match.setPlayer2(44L);
+		match.setResult(MatchWinner.PLAYER1);
+		match.setPoints1(1);
+		match.setPoints2(-1);
 		return match;
 	}
 	

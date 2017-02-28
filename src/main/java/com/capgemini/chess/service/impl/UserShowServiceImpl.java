@@ -44,13 +44,13 @@ public class UserShowServiceImpl implements UserShowService {
 		System.out.printf("Matches won: %32s Matches lost:%30s\n", userInfo.getGamesWon(), userInfo.getGamesLost());
 		System.out.printf("\nLeaderboard:\n");
 		for (UserTO u : ranking) {
-			System.out.printf("%3s %20s %20s %20s", u.getStatistics().getPosition(), u.getProfile().getName(),
+			System.out.printf("%3s %20s %20s %30s\n", u.getStatistics().getPosition(), u.getProfile().getName(),
 					u.getStatistics().getPoints(), u.getStatistics().getLvl().getName());
 		}
 		System.out.printf("\n\nMatch history:\n");
 		int counter = 1;
 		for (MatchTO m : history) {
-			System.out.printf("%3s %20s %20s", counter,  m.getPlayer1() + "(" + m.getPoints1() + ")",
+			System.out.printf("%3s %20s %20s\n", counter,  m.getPlayer1() + "(" + m.getPoints1() + ")",
 					m.getPlayer2() + "(" + m.getPoints2() + ")");
 			counter++;
 		}
