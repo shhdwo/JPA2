@@ -1,8 +1,9 @@
-package com.capgemini.chess.service.to;
+package com.capgemini.chess.dataaccess.entities;
 
 import com.capgemini.chess.enums.MatchWinner;
 
-public class MatchTO {
+public class MatchEntity {
+	
 	private Long id;
 	private Long player1;
 	private Long player2;
