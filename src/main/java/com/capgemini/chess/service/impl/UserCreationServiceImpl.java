@@ -18,7 +18,7 @@ public class UserCreationServiceImpl implements UserCreationService {
 		profile.setName(to.getName());
 		profile.setSurname(to.getSurname());
 		StatisticsTO statistics = new StatisticsTO();
-		statistics.setLvl(Level.Newbie);
+		statistics.setLvl(Level.NEWBIE);
 		UserTO user = new UserTO();
 		user.setProfile(profile);
 		user.setStatistics(statistics);

@@ -26,25 +26,28 @@ public class PointsCalculationServiceImpl implements PointsCalculationService {
 
 	private int calculateLvlGap(MatchTO to, StatisticsTO p1, StatisticsTO p2) {
 		int lvlGap = 0;
+		int lvlPlayer1 = p1.getLvl().getLvl();
+		int lvlPlayer2 = p2.getLvl().getLvl();
 		if (to.getResult() == MatchWinner.PLAYER1)
-			lvlGap = p2.getLvl().getLvl() - p1.getLvl().getLvl();
+			lvlGap = lvlPlayer2 - lvlPlayer1;
 		else if (to.getResult() == MatchWinner.PLAYER2)
-			lvlGap = p1.getLvl().getLvl() - p2.getLvl().getLvl();
+			lvlGap = lvlPlayer1 - lvlPlayer2;
 		return lvlGap;
 	}
 
 	private MatchTO calculateBase(int lvlGap, MatchTO to) {
 		MatchWinner result = to.getResult();
-		if (result == MatchWinner.DRAW) return to;
-		MatchTO calculatedTO = basePointsTable(lvlGap, to);
+		if (result == MatchWinner.DRAW)
+			return to;
+		MatchTO calculatedTO = basePointsFromTable(lvlGap, to);
 		return calculatedTO;
 	}
-	
+
 	private MatchTO calculateBonus(MatchTO to, StatisticsTO p1, StatisticsTO p2) {
-		return to; //TODO bonus calculation to be implemented
+		return to; // TODO bonus calculation to be implemented
 	}
 
-	private MatchTO basePointsTable(int lvlGap, MatchTO to) {
+	private MatchTO basePointsFromTable(int lvlGap, MatchTO to) {
 		MatchWinner result = to.getResult();
 		int winner = 0;
 		int loser = 0;
@@ -113,8 +116,7 @@ public class PointsCalculationServiceImpl implements PointsCalculationService {
 		if (result == MatchWinner.PLAYER1) {
 			to.setPoints1(winner);
 			to.setPoints2(loser);
-		}
-		else if (result == MatchWinner.PLAYER2) {
+		} else if (result == MatchWinner.PLAYER2) {
 			to.setPoints1(loser);
 			to.setPoints2(winner);
 		}

@@ -48,7 +48,7 @@ public class PointsCalculationServiceImplTest {
 	private UserTO giveUser1() {
 		UserTO user = new UserTO();
 		StatisticsTO stats = new StatisticsTO();
-		stats.setLvl(Level.Weakling);
+		stats.setLvl(Level.WEAKLING);
 		stats.setGamesWon(4);
 		stats.setGamesLost(6);
 		stats.setGamesDrawn(0);
@@ -59,7 +59,7 @@ public class PointsCalculationServiceImplTest {
 	private UserTO giveUser2() {
 		UserTO user = new UserTO();
 		StatisticsTO stats = new StatisticsTO();
-		stats.setLvl(Level.Advanced);
+		stats.setLvl(Level.ADVANCED);
 		stats.setGamesWon(200);
 		stats.setGamesLost(110);
 		stats.setGamesDrawn(3);

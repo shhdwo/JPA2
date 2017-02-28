@@ -2,8 +2,8 @@ package com.capgemini.chess.service;
 
 import com.capgemini.chess.service.to.MatchTO;
 
-public interface StatisticsManagementFacade {
+public interface StatisticsUpdateService {
 	
-	void update(MatchTO to);
+	void updateStatistics(MatchTO to);
 
 }
