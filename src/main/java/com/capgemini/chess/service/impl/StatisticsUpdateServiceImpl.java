@@ -15,12 +15,16 @@ public class StatisticsUpdateServiceImpl implements StatisticsUpdateService {
 	
 	@Autowired
 	private PlayerRankingUpdateServiceImpl rankingUpdateService;
+	
+	@Autowired
+	private MatchHistoryUpdateServiceImpl matchHistoryUpdateService;
 
 	@Override
 	public void updateStatistics(MatchTO to) {
 		MatchTO calculatedMatchTO = pointsCalculationService.calculatePoints(to);
 		levelUpdateService.updateLevel(calculatedMatchTO);
 		rankingUpdateService.updateRanking();
+		matchHistoryUpdateService.updateMatchHistory(calculatedMatchTO);
 	}
 
 }
