@@ -34,7 +34,8 @@ public class MatchDaoImpl implements MatchDao {
 		Map<Long, MatchEntity> entities = dataSource.getMatches();
 		List<MatchEntity> entitiesList = new ArrayList<MatchEntity>();
 		for (MatchEntity me : entities.values()) {
-			if (me.getPlayer1().equals(id) || me.getPlayer2().equals(id)) entitiesList.add(me);
+			if (me.getPlayer1().equals(id) || me.getPlayer2().equals(id))
+				entitiesList.add(me);
 		}
 		return MatchMapper.map2TOs(entitiesList);
 	}

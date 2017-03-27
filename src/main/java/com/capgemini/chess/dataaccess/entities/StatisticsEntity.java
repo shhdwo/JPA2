@@ -1,15 +1,38 @@
 package com.capgemini.chess.dataaccess.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.capgemini.chess.enums.Level;
 
-public class StatisticsEntity {
+@Entity
+@Table(name = "statistics")
+public class StatisticsEntity extends AbstractEntity {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
+	@Column(nullable=false)
 	private int points;
+	
+	@Column(nullable=false)
 	private Level lvl;
+	
+	@Column(nullable=false)
 	private int gamesWon;
+	
+	@Column(nullable=false)
 	private int gamesLost;
+	
+	@Column(nullable=false)
 	private int gamesDrawn;
+	
+	@Column(nullable=false)
 	private int position;
 
 	public Long getId() {

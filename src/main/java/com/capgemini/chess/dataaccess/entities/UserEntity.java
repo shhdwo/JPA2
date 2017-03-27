@@ -1,11 +1,33 @@
 package com.capgemini.chess.dataaccess.entities;
 
-public class UserEntity {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "user")
+public class UserEntity extends AbstractEntity {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
+	@Column(nullable = false)
 	private String email;
+	
+	@Column(nullable = false)
 	private String password;
+	
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval=true)
 	private ProfileEntity profile;
+	
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval=true)
 	private StatisticsEntity statistics;
 
 	public StatisticsEntity getStatistics() {

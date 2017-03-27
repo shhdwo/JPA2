@@ -48,7 +48,7 @@ public class UserDaoImpl implements UserDao {
 	public UserTO find(Long id) {
 		return UserMapper.map(dataSource.getUsers().get(id));
 	}
-	
+
 	@Override
 	public List<UserTO> findAll() {
 		Map<Long, UserEntity> entities = dataSource.getUsers();
