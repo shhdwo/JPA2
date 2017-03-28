@@ -10,6 +10,6 @@ public interface UserDao extends Dao<UserTO, Long> {
 	
 	List<UserTO> findAllAndOrderByPoints();
 	
-	int countUsersWithPointsMoreThan(int points);
+	long countUsersWithPointsMoreThan(int points);
 
 }

@@ -13,8 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @NamedQueries({
-	@NamedQuery(name = "Match.findAllAndOrderByPoints", query="SELECT u FROM user u ORDER BY u.statistics.points DESC"),
-	@NamedQuery(name = "Match.countUsersWithPointsMoreThan", query="SELECT count(u) FROM user u WHERE u.statistics.points > :points")
+	@NamedQuery(name="UserEntity.findAllAndOrderByPoints", query="SELECT u FROM UserEntity u ORDER BY u.statistics.points DESC"),
+	@NamedQuery(name="UserEntity.countUsersWithPointsMoreThan", query="SELECT count(u) FROM UserEntity u WHERE u.statistics.points > :points")
 })
 @Entity
 @Table(name = "user")

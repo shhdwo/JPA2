@@ -28,7 +28,7 @@ public class UserShowServiceImpl implements UserShowService {
 		UserTO userTO = userDao.findOne(id);
 		List<MatchTO> history = matchDao.findByUserId(id);
 		List<UserTO> ranking = userDao.findAllAndOrderByPoints();
-		int userPosition = 1 + userDao.countUsersWithPointsMoreThan(userTO.getStatistics().getPoints());
+		long userPosition = 1L + userDao.countUsersWithPointsMoreThan(userTO.getStatistics().getPoints());
 		
 		bindValues(userInfo, userTO, ranking, history, userPosition);
 		printOutToConsole(userInfo, ranking, history);
@@ -59,7 +59,7 @@ public class UserShowServiceImpl implements UserShowService {
 		}
 	}
 
-	private void bindValues(UserInfoTO userInfo, UserTO userTO, List<UserTO> ranking, List<MatchTO> history, int userPosition) {
+	private void bindValues(UserInfoTO userInfo, UserTO userTO, List<UserTO> ranking, List<MatchTO> history, long userPosition) {
 		userInfo.setAboutMe(userTO.getProfile().getAboutMe());
 		userInfo.setGamesDrawn(userTO.getStatistics().getGamesDrawn());
 		userInfo.setGamesLost(userTO.getStatistics().getGamesLost());

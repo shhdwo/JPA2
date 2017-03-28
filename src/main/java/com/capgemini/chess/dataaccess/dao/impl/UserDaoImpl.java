@@ -28,13 +28,13 @@ public class UserDaoImpl extends AbstractDao<UserEntity, UserTO, Long> implement
 	@Override
 	public List<UserTO> findAllAndOrderByPoints() {
 		return mapper.map2TOs(
-				em.createNamedQuery("Match.findAllAndOrderByPoints", UserEntity.class)
+				em.createNamedQuery("UserEntity.findAllAndOrderByPoints", UserEntity.class)
 				.getResultList());
 	}
 	
 	@Override
-	public int countUsersWithPointsMoreThan(int points) {
-		return em.createNamedQuery("Match.countUsersWithPointsMoreThan", Integer.class)
+	public long countUsersWithPointsMoreThan(int points) {
+		return em.createNamedQuery("UserEntity.countUsersWithPointsMoreThan", Long.class)
 				.setParameter("points", points)
 				.getSingleResult();
 	}

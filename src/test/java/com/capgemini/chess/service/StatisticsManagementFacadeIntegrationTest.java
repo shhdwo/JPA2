@@ -74,12 +74,12 @@ public class StatisticsManagementFacadeIntegrationTest {
 		// when
 		service.updateStatistics(matchTO);
 		List<MatchTO> foundMatches = matchDao.findAll();
-		List<MatchTO> p1matches = matchDao.findByUserId(dao.findOne(1L).getId());	
+		List<MatchTO> p1matches = matchDao.findByUserId(1L);	
 		
 		// then
-		assertThat(foundMatches).hasSize(1);
-		assertThat(p1matches).hasSize(1);
-		assertThat(p1matches.get(0).getResult()).isEqualTo(MatchWinner.PLAYER1);
+		assertThat(foundMatches).hasSize(3);
+		assertThat(p1matches).hasSize(3);
+		assertThat(p1matches.get(2).getResult()).isEqualTo(MatchWinner.PLAYER1);
 	}
 	
 	private MatchTO giveMatch() {

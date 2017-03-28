@@ -39,10 +39,11 @@ public class UserShowServiceImplTest {
 	public void shouldReturnUserInfoTO() {
 		// given
 		Mockito.when(userDao.findOne(13L)).thenReturn(giveUser());
-		List<UserTO> users = giveUsers();
-		users.sort(new PointsComparator());
-		Mockito.when(userDao.findAllAndOrderByPoints()).thenReturn(users);
+		List<UserTO> sortedUsers = giveUsers();
+		Mockito.when(userDao.findAllAndOrderByPoints()).thenReturn(sortedUsers);
 		Mockito.when(matchDao.findByUserId(13L)).thenReturn(giveHistory());
+		Mockito.when(userDao.countUsersWithPointsMoreThan(1234567)).thenReturn(1L);
+		
 		// when
 		UserInfoTO userInfo = service.showUser(13L);
 		// then
@@ -110,6 +111,7 @@ public class UserShowServiceImplTest {
 		List<UserTO> ranking = new ArrayList<UserTO>();
 		ranking.add(giveUser());
 		ranking.add(giveUser2());
+		ranking.sort(new PointsComparator());
 		return ranking;
 	}
 	
@@ -122,10 +124,12 @@ public class UserShowServiceImplTest {
 	
 	private MatchTO giveMatch() {
 		MatchTO match = new MatchTO();
-		UserTO player1 = new UserTO();
-		player1.setId(13L);
+		UserTO player1 = giveUser();
 		UserTO player2 = new UserTO();
 		player2.setId(666L);
+		ProfileTO profileP2 = new ProfileTO();
+		profileP2.setName("Zenek");
+		player2.setProfile(profileP2);
 		match.setPlayer1(player1);
 		match.setPlayer2(player2);
 		match.setResult(MatchWinner.PLAYER1);
@@ -136,10 +140,8 @@ public class UserShowServiceImplTest {
 	
 	private MatchTO giveMatch2() {
 		MatchTO match = new MatchTO();
-		UserTO player1 = new UserTO();
-		player1.setId(13L);
-		UserTO player2 = new UserTO();
-		player2.setId(44L);
+		UserTO player1 = giveUser();
+		UserTO player2 = giveUser2();
 		match.setPlayer1(player1);
 		match.setPlayer2(player2);
 		match.setResult(MatchWinner.PLAYER1);

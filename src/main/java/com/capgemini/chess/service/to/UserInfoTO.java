@@ -16,7 +16,7 @@ public class UserInfoTO {
 	private int gamesWon;
 	private int gamesLost;
 	private int gamesDrawn;
-	private int position;
+	private long position;
 	private List<UserTO> ranking;
 	private List<MatchTO> playerHistory;
 
@@ -116,11 +116,11 @@ public class UserInfoTO {
 		this.gamesDrawn = gamesDrawn;
 	}
 
-	public int getPosition() {
+	public long getPosition() {
 		return position;
 	}
 
-	public void setPosition(int position) {
+	public void setPosition(long position) {
 		this.position = position;
 	}
 

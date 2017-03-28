@@ -17,6 +17,7 @@ import com.capgemini.chess.dataaccess.dao.UserDao;
 import com.capgemini.chess.exception.UserValidationException;
 import com.capgemini.chess.service.to.RegistrationTO;
 import com.capgemini.chess.service.to.UpdateTO;
+import com.capgemini.chess.service.to.UserInfoTO;
 import com.capgemini.chess.service.to.UserTO;
 
 @RunWith(SpringRunner.class)
@@ -29,6 +30,38 @@ public class UserServiceFacadeIntegrationTest {
 
 	@Autowired
 	private UserDao dao;
+	
+	@Test
+	public void shouldReturnUserInfoTo() {
+		// given when
+		UserInfoTO userInfo = service.show(2L);
+		
+		// then
+		assertThat(userInfo.getPosition()).isEqualTo(2L);
+		assertThat(userInfo.getGamesWon()).isEqualTo(18);
+		assertThat(userInfo.getPlayerHistory()).hasSize(2);
+		assertThat(userInfo.getPlayerHistory().get(0).getPlayer1().getId()).isEqualTo(1L);
+		assertThat(userInfo.getPlayerHistory().get(0).getPlayer1().getEmail()).isEqualTo("email@example.com");
+		assertThat(userInfo.getPlayerHistory().get(0).getPlayer1().getProfile().getName()).isEqualTo("Garri");
+	}
+	
+	@Test
+	public void shouldCountUsersWithPointsMoreThan301() {
+		// given when
+		long counted = dao.countUsersWithPointsMoreThan(301);
+		
+		// then
+		assertThat(counted).isEqualTo(1L);
+	}
+	
+	@Test
+	public void shouldCountUsersWithPointsMoreThan300() {
+		// given when
+		long counted = dao.countUsersWithPointsMoreThan(300);
+		
+		// then
+		assertThat(counted).isEqualTo(2L);
+	}
 	
 	@Test
 	public void shouldFindUserById() {
