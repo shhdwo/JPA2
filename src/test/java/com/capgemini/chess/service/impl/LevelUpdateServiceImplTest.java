@@ -59,7 +59,7 @@ public class LevelUpdateServiceImplTest {
 	private UserTO giveUser1() {
 		UserTO user = new UserTO();
 		StatisticsTO stats = new StatisticsTO();
-		stats.setLvl(Level.NEWBIE);
+		stats.setLevel(Level.NEWBIE);
 		stats.setGamesWon(4);
 		stats.setGamesLost(6);
 		stats.setGamesDrawn(0);
@@ -72,7 +72,7 @@ public class LevelUpdateServiceImplTest {
 	private UserTO giveUser2() {
 		UserTO user = new UserTO();
 		StatisticsTO stats = new StatisticsTO();
-		stats.setLvl(Level.ADVANCED);
+		stats.setLevel(Level.ADVANCED);
 		stats.setGamesWon(200);
 		stats.setGamesLost(110);
 		stats.setGamesDrawn(3);

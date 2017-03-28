@@ -26,8 +26,8 @@ public class PointsCalculationServiceImpl implements PointsCalculationService {
 
 	private int calculateLvlGap(MatchTO to, StatisticsTO p1, StatisticsTO p2) {
 		int lvlGap = 0;
-		int lvlPlayer1 = p1.getLvl().getLvl();
-		int lvlPlayer2 = p2.getLvl().getLvl();
+		int lvlPlayer1 = p1.getLevel().getLvl();
+		int lvlPlayer2 = p2.getLevel().getLvl();
 		if (to.getResult() == MatchWinner.PLAYER1)
 			lvlGap = lvlPlayer2 - lvlPlayer1;
 		else if (to.getResult() == MatchWinner.PLAYER2)

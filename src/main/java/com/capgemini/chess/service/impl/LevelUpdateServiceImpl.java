@@ -38,7 +38,7 @@ public class LevelUpdateServiceImpl implements LevelUpdateService {
 		user.setStatistics(userStats);
 		userDao.update(user);
 		Level updatedLevel = changeLevel(user);
-		user.getStatistics().setLvl(updatedLevel);
+		user.getStatistics().setLevel(updatedLevel);
 		userDao.update(user);
 		return updatedLevel;
 	}

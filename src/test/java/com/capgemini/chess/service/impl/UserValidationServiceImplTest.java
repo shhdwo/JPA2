@@ -37,7 +37,7 @@ public class UserValidationServiceImplTest {
 		exception.expectMessage("User with given email already exists");
 
 		// when
-		service.validate(user);
+		service.validateRegistration(user);
 	}
 
 	@Test
@@ -47,7 +47,7 @@ public class UserValidationServiceImplTest {
 		Mockito.when(userDao.findByEmail(user.getEmail())).thenReturn(null);
 
 		// when
-		service.validate(user);
+		service.validateRegistration(user);
 	}
 
 	@Test
@@ -61,6 +61,6 @@ public class UserValidationServiceImplTest {
 		exception.expectMessage("Password should be at least 8 characters long");
 
 		// when
-		service.validate(user);
+		service.validateRegistration(user);
 	}
 }

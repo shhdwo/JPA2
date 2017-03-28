@@ -1,5 +1,7 @@
 package com.capgemini.chess.service.impl;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import com.capgemini.chess.service.to.UpdateTO;
 import com.capgemini.chess.service.to.UserInfoTO;
 import com.capgemini.chess.service.to.UserTO;
 
+@Transactional
 @Service
 public class UserServiceFacadeImpl implements UserServiceFacade {
 
@@ -31,7 +34,7 @@ public class UserServiceFacadeImpl implements UserServiceFacade {
 	}
 
 	@Override
-	public UserTO update(UpdateTO to) {
+	public UserTO update(UpdateTO to) throws UserValidationException {
 		return updateService.update(to);
 	}
 

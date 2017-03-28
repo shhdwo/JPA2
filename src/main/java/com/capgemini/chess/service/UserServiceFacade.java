@@ -9,7 +9,7 @@ import com.capgemini.chess.service.to.UserTO;
 public interface UserServiceFacade {
 	UserTO register(RegistrationTO to) throws UserValidationException;
 	
-	UserTO update(UpdateTO to);
+	UserTO update(UpdateTO to) throws UserValidationException;
 	
 	UserInfoTO show(Long id);
 }

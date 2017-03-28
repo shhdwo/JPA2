@@ -25,7 +25,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
 	@Override
 	public UserTO register(RegistrationTO to) throws UserValidationException {
-		validationService.validate(to);
+		validationService.validateRegistration(to);
 		UserTO user = creationService.create(to);
 		return userDao.save(user);
 	}

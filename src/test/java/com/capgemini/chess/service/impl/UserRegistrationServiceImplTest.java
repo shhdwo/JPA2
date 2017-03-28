@@ -41,7 +41,7 @@ public class UserRegistrationServiceImplTest {
 
 		// then
 		InOrder inOrder = Mockito.inOrder(validationService, creationService, userDao);
-		inOrder.verify(validationService).validate(registration);
+		inOrder.verify(validationService).validateRegistration(registration);
 		inOrder.verify(creationService).create(registration);
 		inOrder.verify(userDao).save(expectedUser);
 	}

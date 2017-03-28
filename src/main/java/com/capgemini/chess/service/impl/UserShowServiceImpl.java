@@ -45,7 +45,7 @@ public class UserShowServiceImpl implements UserShowService {
 		System.out.printf("\nLeaderboard:\n");
 		for (UserTO u : ranking) {
 			System.out.printf("%3s %20s %20s %30s\n", u.getStatistics().getPosition(), u.getProfile().getName(),
-					u.getStatistics().getPoints(), u.getStatistics().getLvl().getName());
+					u.getStatistics().getPoints(), u.getStatistics().getLevel().getName());
 		}
 		System.out.printf("\n\nMatch history:\n");
 		int counter = 1;
@@ -62,7 +62,7 @@ public class UserShowServiceImpl implements UserShowService {
 		userInfo.setGamesLost(userTO.getStatistics().getGamesLost());
 		userInfo.setGamesWon(userTO.getStatistics().getGamesWon());
 		userInfo.setLifeMotto(userTO.getProfile().getLifeMotto());
-		userInfo.setLvl(userTO.getStatistics().getLvl());
+		userInfo.setLvl(userTO.getStatistics().getLevel());
 		userInfo.setName(userTO.getProfile().getName());
 		userInfo.setPlayerHistory(history);
 		userInfo.setPoints(userTO.getStatistics().getPoints());

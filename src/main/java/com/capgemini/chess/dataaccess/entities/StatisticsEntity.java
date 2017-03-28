@@ -21,7 +21,7 @@ public class StatisticsEntity extends AbstractEntity {
 	private int points;
 	
 	@Column(nullable=false)
-	private Level lvl;
+	private Level level;
 	
 	@Column(nullable=false)
 	private int gamesWon;
@@ -32,7 +32,7 @@ public class StatisticsEntity extends AbstractEntity {
 	@Column(nullable=false)
 	private int gamesDrawn;
 	
-	@Column(nullable=false)
+	@Column(nullable=true)
 	private int position;
 
 	public Long getId() {
@@ -51,12 +51,12 @@ public class StatisticsEntity extends AbstractEntity {
 		this.points = points;
 	}
 
-	public Level getLvl() {
-		return lvl;
+	public Level getLevel() {
+		return level;
 	}
 
-	public void setLvl(Level lvl) {
-		this.lvl = lvl;
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 
 	public int getGamesWon() {

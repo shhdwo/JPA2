@@ -49,7 +49,7 @@ public class UserShowServiceImplTest {
 		Assert.assertEquals(giveUser().getStatistics().getGamesLost(), userInfo.getGamesLost());
 		Assert.assertEquals(giveUser().getStatistics().getGamesWon(), userInfo.getGamesWon());
 		Assert.assertEquals(giveUser().getProfile().getLifeMotto(), userInfo.getLifeMotto());
-		Assert.assertEquals(giveUser().getStatistics().getLvl(), userInfo.getLvl());
+		Assert.assertEquals(giveUser().getStatistics().getLevel(), userInfo.getLvl());
 		Assert.assertEquals(giveUser().getProfile().getName(), userInfo.getName());
 		Assert.assertEquals(giveUser().getStatistics().getPoints(), userInfo.getPoints());
 		Assert.assertEquals(giveUser().getStatistics().getPosition(), userInfo.getPosition());
@@ -72,7 +72,7 @@ public class UserShowServiceImplTest {
 		profile.setLifeMotto("I'm not trying to be sexy. It's just my way of expressing myself when I move around.");
 		StatisticsTO stats = new StatisticsTO();
 		stats.setId(2L);
-		stats.setLvl(Level.MASTER);
+		stats.setLevel(Level.MASTER);
 		stats.setPoints(1234567);
 		stats.setPosition(2);
 		stats.setGamesDrawn(1);
@@ -96,7 +96,7 @@ public class UserShowServiceImplTest {
 		profile.setLifeMotto("There is no opponent you cant beat with roundhouse kick.");
 		StatisticsTO stats = new StatisticsTO();
 		stats.setId(1L);
-		stats.setLvl(Level.CHUCK_NORRIS_OF_CHESS);
+		stats.setLevel(Level.CHUCK_NORRIS_OF_CHESS);
 		stats.setPoints(2005670);
 		stats.setPosition(1);
 		stats.setGamesDrawn(1);

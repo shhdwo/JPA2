@@ -6,7 +6,7 @@ public class StatisticsTO {
 	
 	private Long id;
 	private int points;
-	private Level lvl;
+	private Level level;
 	private int gamesWon;
 	private int gamesLost;
 	private int gamesDrawn;
@@ -28,12 +28,12 @@ public class StatisticsTO {
 		this.points = points;
 	}
 
-	public Level getLvl() {
-		return lvl;
+	public Level getLevel() {
+		return level;
 	}
 
-	public void setLvl(Level lvl) {
-		this.lvl = lvl;
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 
 	public int getGamesWon() {

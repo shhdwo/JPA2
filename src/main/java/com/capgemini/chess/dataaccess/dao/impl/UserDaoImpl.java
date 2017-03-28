@@ -20,7 +20,7 @@ public class UserDaoImpl extends AbstractDao<UserEntity, UserTO, Long> implement
 		return mapper.map2To(
 				em.createQuery("SELECT u FROM UserEntity u WHERE u.email = :email", UserEntity.class)
 				.setParameter("email", email)
-				.getSingleResult());
+				.getResultList().stream().findFirst().orElse(null));
 	}
 
 }

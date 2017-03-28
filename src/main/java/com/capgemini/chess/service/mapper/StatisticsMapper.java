@@ -15,7 +15,7 @@ public class StatisticsMapper implements Mapper<StatisticsEntity, StatisticsTO> 
 		if (entity != null) {
 			StatisticsTO to = new StatisticsTO();
 			to.setId(entity.getId());
-			to.setLvl(entity.getLvl());
+			to.setLevel(entity.getLevel());
 			to.setPoints(entity.getPoints());
 			to.setGamesWon(entity.getGamesWon());
 			to.setGamesLost(entity.getGamesLost());
@@ -30,7 +30,7 @@ public class StatisticsMapper implements Mapper<StatisticsEntity, StatisticsTO> 
 		if (to != null) {
 			StatisticsEntity entity = new StatisticsEntity();
 			entity.setId(to.getId());
-			entity.setLvl(to.getLvl());
+			entity.setLevel(to.getLevel());
 			entity.setPoints(to.getPoints());
 			entity.setGamesWon(to.getGamesWon());
 			entity.setGamesLost(to.getGamesLost());

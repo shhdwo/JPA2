@@ -9,6 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.junit.Assert;
 
 import com.capgemini.chess.dataaccess.dao.UserDao;
+import com.capgemini.chess.exception.UserValidationException;
 import com.capgemini.chess.service.to.ProfileTO;
 import com.capgemini.chess.service.to.UpdateTO;
 import com.capgemini.chess.service.to.UserTO;
@@ -23,7 +24,7 @@ public class UserUpdateServiceImplTest {
 	private UserDao userDao;
 	
 	@Test
-	public void shouldUpdateUser() {
+	public void shouldUpdateUser() throws UserValidationException {
 		// given
 		Mockito.when(userDao.findOne(giveUpdate().getId())).thenReturn(giveUser());
 		UpdateTO updateTO = giveUpdate();
