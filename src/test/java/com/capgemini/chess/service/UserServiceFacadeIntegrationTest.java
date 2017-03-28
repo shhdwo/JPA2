@@ -3,6 +3,8 @@ package com.capgemini.chess.service;
 import javax.transaction.Transactional;
 
 import static org.fest.assertions.api.Assertions.*;
+
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -87,10 +89,10 @@ public class UserServiceFacadeIntegrationTest {
 		UpdateTO update = giveUpdateTO();
 		
 		// when
-		UserTO user = service.update(update);
+		service.update(update);
+		UserTO actual = dao.findOne(update.getId());
 		
 		// then
-		UserTO actual = dao.findOne(user.getId());
 		Assert.assertEquals(update.getAboutMe(), actual.getProfile().getAboutMe());
 		Assert.assertEquals(update.getLifeMotto(), actual.getProfile().getLifeMotto());
 		Assert.assertEquals(update.getName(), actual.getProfile().getName());
@@ -139,7 +141,7 @@ public class UserServiceFacadeIntegrationTest {
 	
 	private UpdateTO giveUpdateTO() {
 		UpdateTO to = new UpdateTO();
-		to.setId(new Long(1));
+		to.setId(1L);
 		to.setAboutMe("I am master at chess");
 		to.setName("Major");
 		to.setSurname("Chessminator");

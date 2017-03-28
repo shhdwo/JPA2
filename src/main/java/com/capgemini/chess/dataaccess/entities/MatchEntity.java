@@ -2,6 +2,7 @@ package com.capgemini.chess.dataaccess.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 
 import com.capgemini.chess.enums.MatchWinner;
 
-@NamedQuery(name="Match.findByUserId", query="SELECT m FROM MatchEntity m WHERE m.player1 = :id OR m.player2 = :id")
+@NamedQuery(name="Match.findByUserId", query="SELECT m FROM MatchEntity m WHERE m.player1.id = :id OR m.player2.id = :id")
 @Entity
 @Table(name = "matches")
 public class MatchEntity extends AbstractEntity {
@@ -33,6 +34,7 @@ public class MatchEntity extends AbstractEntity {
 	@Column(nullable=true)
 	private int points2;
 	
+	@Enumerated
 	@Column(nullable=false)
 	private MatchWinner result;
 

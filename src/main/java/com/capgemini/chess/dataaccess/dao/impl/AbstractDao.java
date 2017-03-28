@@ -30,7 +30,8 @@ public abstract class AbstractDao<E, T, K extends Serializable> implements Dao<T
 
     @Override
     public T save(T to) {
-        entityManager.persist(mapper.map2Entity(to));
+    	E entity = mapper.map2Entity(to);
+        entityManager.persist(entity);
         return to;
     }
 

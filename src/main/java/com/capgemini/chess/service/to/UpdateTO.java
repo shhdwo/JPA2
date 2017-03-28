@@ -1,7 +1,7 @@
 package com.capgemini.chess.service.to;
 
 public class UpdateTO {
-	private Long id;
+	private long id;
 	private String email;
 	private String password;
 	private String name;
@@ -9,11 +9,11 @@ public class UpdateTO {
 	private String aboutMe;
 	private String lifeMotto;
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

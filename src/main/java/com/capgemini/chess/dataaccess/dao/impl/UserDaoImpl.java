@@ -1,5 +1,7 @@
 package com.capgemini.chess.dataaccess.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -21,6 +23,20 @@ public class UserDaoImpl extends AbstractDao<UserEntity, UserTO, Long> implement
 				em.createQuery("SELECT u FROM UserEntity u WHERE u.email = :email", UserEntity.class)
 				.setParameter("email", email)
 				.getResultList().stream().findFirst().orElse(null));
+	}
+	
+	@Override
+	public List<UserTO> findAllAndOrderByPoints() {
+		return mapper.map2TOs(
+				em.createNamedQuery("Match.findAllAndOrderByPoints", UserEntity.class)
+				.getResultList());
+	}
+	
+	@Override
+	public int countUsersWithPointsMoreThan(int points) {
+		return em.createNamedQuery("Match.countUsersWithPointsMoreThan", Integer.class)
+				.setParameter("points", points)
+				.getSingleResult();
 	}
 
 }

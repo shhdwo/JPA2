@@ -31,9 +31,6 @@ public class StatisticsEntity extends AbstractEntity {
 	
 	@Column(nullable=false)
 	private int gamesDrawn;
-	
-	@Column(nullable=true)
-	private int position;
 
 	public Long getId() {
 		return id;
@@ -81,14 +78,6 @@ public class StatisticsEntity extends AbstractEntity {
 
 	public void setGamesDrawn(int gamesDrawn) {
 		this.gamesDrawn = gamesDrawn;
-	}
-
-	public int getPosition() {
-		return position;
-	}
-
-	public void setPosition(int position) {
-		this.position = position;
 	}
 
 }

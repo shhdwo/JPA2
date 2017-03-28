@@ -20,7 +20,6 @@ public class StatisticsMapper implements Mapper<StatisticsEntity, StatisticsTO> 
 			to.setGamesWon(entity.getGamesWon());
 			to.setGamesLost(entity.getGamesLost());
 			to.setGamesDrawn(entity.getGamesDrawn());
-			to.setPosition(entity.getPosition());
 			return to;
 		}
 		return null;
@@ -35,7 +34,6 @@ public class StatisticsMapper implements Mapper<StatisticsEntity, StatisticsTO> 
 			entity.setGamesWon(to.getGamesWon());
 			entity.setGamesLost(to.getGamesLost());
 			entity.setGamesDrawn(to.getGamesDrawn());
-			entity.setPosition(to.getPosition());
 			return entity;
 		}
 		return null;

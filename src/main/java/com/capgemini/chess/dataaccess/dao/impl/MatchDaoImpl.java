@@ -24,4 +24,5 @@ public class MatchDaoImpl extends AbstractDao<MatchEntity, MatchTO, Long> implem
 				.setParameter("id", id)
 				.getResultList());
 	}
+	
 }

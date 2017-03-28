@@ -27,10 +27,11 @@ public class UserUpdateServiceImplTest {
 	public void shouldUpdateUser() throws UserValidationException {
 		// given
 		Mockito.when(userDao.findOne(giveUpdate().getId())).thenReturn(giveUser());
+		Mockito.when(userDao.findByEmail((giveUpdate().getEmail()))).thenReturn(giveUser());
 		UpdateTO updateTO = giveUpdate();
 		
 		// when
-		UserTO updatedUser = service.update(updateTO);
+		UserTO updatedUser = service.update(updateTO); //TODO czemu nie przechodzi?
 		
 		// then
 		Assert.assertEquals(updateTO.getAboutMe(), updatedUser.getProfile().getAboutMe());
@@ -44,12 +45,12 @@ public class UserUpdateServiceImplTest {
 	private UserTO giveUser() {
 		ProfileTO profileTo = new ProfileTO();
 		profileTo.setAboutMe("I am noob at chess");
-		profileTo.setId(new Long(1));
+		profileTo.setId(1L);
 		profileTo.setName("Minor");
 		profileTo.setSurname("Chessretardo");
 		profileTo.setLifeMotto("In order to win, it means somebody has to lose");
 		UserTO userTO = new UserTO();
-		userTO.setId(new Long(1));
+		userTO.setId(1L);
 		userTO.setEmail("chess@retardo.pl");
 		userTO.setPassword("87654321");
 		userTO.setProfile(profileTo);
@@ -58,7 +59,7 @@ public class UserUpdateServiceImplTest {
 	
 	private UpdateTO giveUpdate() {
 		UpdateTO updateTO = new UpdateTO();
-		updateTO.setId(new Long(1));
+		updateTO.setId(1L);
 		updateTO.setAboutMe("I am master at chess");
 		updateTO.setName("Major");
 		updateTO.setSurname("Chessminator");

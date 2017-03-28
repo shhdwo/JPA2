@@ -11,9 +11,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.capgemini.chess.comparator.PointsComparator;
 import com.capgemini.chess.dataaccess.dao.MatchDao;
 import com.capgemini.chess.dataaccess.dao.UserDao;
-import com.capgemini.chess.dataaccess.entities.UserEntity;
 import com.capgemini.chess.enums.Level;
 import com.capgemini.chess.enums.MatchWinner;
 import com.capgemini.chess.service.to.MatchTO;
@@ -39,7 +39,9 @@ public class UserShowServiceImplTest {
 	public void shouldReturnUserInfoTO() {
 		// given
 		Mockito.when(userDao.findOne(13L)).thenReturn(giveUser());
-		Mockito.when(userDao.findAll()).thenReturn(giveUsers());
+		List<UserTO> users = giveUsers();
+		users.sort(new PointsComparator());
+		Mockito.when(userDao.findAllAndOrderByPoints()).thenReturn(users);
 		Mockito.when(matchDao.findByUserId(13L)).thenReturn(giveHistory());
 		// when
 		UserInfoTO userInfo = service.showUser(13L);
@@ -52,7 +54,6 @@ public class UserShowServiceImplTest {
 		Assert.assertEquals(giveUser().getStatistics().getLevel(), userInfo.getLvl());
 		Assert.assertEquals(giveUser().getProfile().getName(), userInfo.getName());
 		Assert.assertEquals(giveUser().getStatistics().getPoints(), userInfo.getPoints());
-		Assert.assertEquals(giveUser().getStatistics().getPosition(), userInfo.getPosition());
 		Assert.assertEquals(giveUser().getProfile().getSurname(), userInfo.getSurname());
 		Assert.assertEquals(giveUser().getId(), userInfo.getUserId());
 		Assert.assertEquals(giveHistory().size(), userInfo.getPlayerHistory().size());
@@ -74,7 +75,6 @@ public class UserShowServiceImplTest {
 		stats.setId(2L);
 		stats.setLevel(Level.MASTER);
 		stats.setPoints(1234567);
-		stats.setPosition(2);
 		stats.setGamesDrawn(1);
 		stats.setGamesLost(0);
 		stats.setGamesWon(9999);
@@ -98,7 +98,6 @@ public class UserShowServiceImplTest {
 		stats.setId(1L);
 		stats.setLevel(Level.CHUCK_NORRIS_OF_CHESS);
 		stats.setPoints(2005670);
-		stats.setPosition(1);
 		stats.setGamesDrawn(1);
 		stats.setGamesLost(1);
 		stats.setGamesWon(555);
@@ -123,9 +122,9 @@ public class UserShowServiceImplTest {
 	
 	private MatchTO giveMatch() {
 		MatchTO match = new MatchTO();
-		UserEntity player1 = new UserEntity();
+		UserTO player1 = new UserTO();
 		player1.setId(13L);
-		UserEntity player2 = new UserEntity();
+		UserTO player2 = new UserTO();
 		player2.setId(666L);
 		match.setPlayer1(player1);
 		match.setPlayer2(player2);
@@ -137,9 +136,9 @@ public class UserShowServiceImplTest {
 	
 	private MatchTO giveMatch2() {
 		MatchTO match = new MatchTO();
-		UserEntity player1 = new UserEntity();
+		UserTO player1 = new UserTO();
 		player1.setId(13L);
-		UserEntity player2 = new UserEntity();
+		UserTO player2 = new UserTO();
 		player2.setId(44L);
 		match.setPlayer1(player1);
 		match.setPlayer2(player2);

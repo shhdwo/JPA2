@@ -12,14 +12,14 @@ public enum Level {
 	MASTER(9, "Master", 31401, 320, 0.64F),
 	CHUCK_NORRIS_OF_CHESS(10, "Chuck Norris of Chess", 76801, 405, 0.72F);
 	
-	private final int lvl;
+	private final int level;
 	private final String name;
 	private final int pointsRequired;
 	private final int gamesPlayedRequired;
 	private final float winPercentageRequired;
 	
-	private Level(int lvl, String name, int pointsRequired, int gamesPlayedRequired, float winPercentageRequired) {
-		this.lvl = lvl;
+	private Level(int level, String name, int pointsRequired, int gamesPlayedRequired, float winPercentageRequired) {
+		this.level = level;
 		this.name = name;
 		this.pointsRequired = pointsRequired;
 		this.gamesPlayedRequired = gamesPlayedRequired;
@@ -38,8 +38,8 @@ public enum Level {
 		return gamesPlayedRequired;
 	}
 
-	public int getLvl() {
-		return lvl;
+	public int getLevel() {
+		return level;
 	}
 	
 	public int getPointsRequired() {

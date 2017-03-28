@@ -10,7 +10,6 @@ public class StatisticsTO {
 	private int gamesWon;
 	private int gamesLost;
 	private int gamesDrawn;
-	private int position;
 
 	public Long getId() {
 		return id;
@@ -58,14 +57,6 @@ public class StatisticsTO {
 
 	public void setGamesDrawn(int gamesDrawn) {
 		this.gamesDrawn = gamesDrawn;
-	}
-
-	public int getPosition() {
-		return position;
-	}
-
-	public void setPosition(int position) {
-		this.position = position;
 	}
 
 }

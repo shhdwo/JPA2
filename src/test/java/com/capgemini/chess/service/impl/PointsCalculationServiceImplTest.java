@@ -9,7 +9,6 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.capgemini.chess.dataaccess.dao.UserDao;
-import com.capgemini.chess.dataaccess.entities.UserEntity;
 import com.capgemini.chess.enums.Level;
 import com.capgemini.chess.enums.MatchWinner;
 import com.capgemini.chess.service.to.MatchTO;
@@ -30,9 +29,9 @@ public class PointsCalculationServiceImplTest {
 	public void shouldCalculatePoints() {
 		// given
 		MatchTO match = new MatchTO();
-		UserEntity player1 = new UserEntity();
+		UserTO player1 = new UserTO();
 		player1.setId(13L);
-		UserEntity player2 = new UserEntity();
+		UserTO player2 = new UserTO();
 		player2.setId(666L);
 		match.setPlayer1(player1);
 		match.setPlayer2(player2);
