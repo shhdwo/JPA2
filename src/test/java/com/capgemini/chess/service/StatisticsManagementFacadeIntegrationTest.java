@@ -46,7 +46,6 @@ public class StatisticsManagementFacadeIntegrationTest {
 		MatchTO calculatedMatch = pointsCalcService.calculatePoints(matchTO);
 		
 		// then
-		
 		assertThat(calculatedMatch.getPoints1()).isEqualTo(40);
 		assertThat(calculatedMatch.getPoints2()).isEqualTo(-30);
 	}

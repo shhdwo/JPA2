@@ -45,13 +45,15 @@ public class UserValidationServiceImpl implements UserValidationService {
 	}
 
 	private void validatePassword(RegistrationTO to) throws UserValidationException {
-		if (to.getPassword() != null && to.getPassword().length() < 8) {
-			throw new UserValidationException("Password should be at least 8 characters long");
-		}
+		checkPasswordLength(to.getPassword());
 	}
 	
 	private void validatePassword(UpdateTO to) throws UserValidationException {
-		if (to.getPassword() != null && to.getPassword().length() < 8) {
+		checkPasswordLength(to.getPassword());
+	}
+	
+	private void checkPasswordLength(String password) throws UserValidationException {
+		if (password != null && password.length() < 8) {
 			throw new UserValidationException("Password should be at least 8 characters long");
 		}
 	}

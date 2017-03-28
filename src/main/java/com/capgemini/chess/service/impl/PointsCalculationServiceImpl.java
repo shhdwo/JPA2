@@ -19,9 +19,7 @@ public class PointsCalculationServiceImpl implements PointsCalculationService {
 	public MatchTO calculatePoints(MatchTO to) {
 		StatisticsTO p1 = userDao.findOne(to.getPlayer1().getId()).getStatistics();
 		StatisticsTO p2 = userDao.findOne(to.getPlayer2().getId()).getStatistics();
-		MatchTO base = calculateBase(calculateLvlGap(to, p1, p2), to);
-		MatchTO baseWithBonus = calculateBonus(base, p1, p2);
-		return baseWithBonus;
+		return calculateBase(calculateLvlGap(to, p1, p2), to);
 	}
 
 	private int calculateLvlGap(MatchTO to, StatisticsTO p1, StatisticsTO p2) {
@@ -41,10 +39,6 @@ public class PointsCalculationServiceImpl implements PointsCalculationService {
 			return to;
 		MatchTO calculatedTO = basePointsFromTable(lvlGap, to);
 		return calculatedTO;
-	}
-
-	private MatchTO calculateBonus(MatchTO to, StatisticsTO p1, StatisticsTO p2) {
-		return to; // TODO bonus calculation to be implemented
 	}
 
 	private MatchTO basePointsFromTable(int lvlGap, MatchTO to) {
