@@ -25,7 +25,7 @@ public class UserUpdateServiceImplTest {
 	@Test
 	public void shouldUpdateUser() {
 		// given
-		Mockito.when(userDao.find(giveUpdate().getId())).thenReturn(giveUser());
+		Mockito.when(userDao.findOne(giveUpdate().getId())).thenReturn(giveUser());
 		UpdateTO updateTO = giveUpdate();
 		
 		// when

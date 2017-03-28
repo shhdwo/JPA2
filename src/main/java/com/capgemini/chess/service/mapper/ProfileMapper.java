@@ -1,14 +1,17 @@
 package com.capgemini.chess.service.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
 
 import com.capgemini.chess.dataaccess.entities.ProfileEntity;
 import com.capgemini.chess.service.to.ProfileTO;
 
-public class ProfileMapper {
+@Service
+public class ProfileMapper implements Mapper<ProfileEntity, ProfileTO>{
 
-	public static ProfileTO map(ProfileEntity entity) {
+	public ProfileTO map2To(ProfileEntity entity) {
 		if (entity != null) {
 			ProfileTO to = new ProfileTO();
 			to.setId(entity.getId());
@@ -21,7 +24,7 @@ public class ProfileMapper {
 		return null;
 	}
 
-	public static ProfileEntity map(ProfileTO to) {
+	public ProfileEntity map2Entity(ProfileTO to) {
 		if (to != null) {
 			ProfileEntity entity = new ProfileEntity();
 			entity.setId(to.getId());
@@ -34,11 +37,19 @@ public class ProfileMapper {
 		return null;
 	}
 
-	public static List<ProfileTO> map2TOs(List<ProfileEntity> entities) {
-		return entities.stream().map(ProfileMapper::map).collect(Collectors.toList());
+	public List<ProfileTO> map2TOs(List<ProfileEntity> entities) {
+		List<ProfileTO> tos = new ArrayList<ProfileTO>();
+		for (ProfileEntity u : entities) {
+			tos.add(map2To(u));
+		}
+		return tos;
 	}
 
-	public static List<ProfileEntity> map2Entities(List<ProfileTO> tos) {
-		return tos.stream().map(ProfileMapper::map).collect(Collectors.toList());
+	public List<ProfileEntity> map2Entities(List<ProfileTO> tos) {
+		List<ProfileEntity> entities = new ArrayList<ProfileEntity>();
+		for (ProfileTO u : tos) {
+			entities.add(map2Entity(u));
+		}
+		return entities;
 	}
 }

@@ -17,8 +17,8 @@ public class PointsCalculationServiceImpl implements PointsCalculationService {
 
 	@Override
 	public MatchTO calculatePoints(MatchTO to) {
-		StatisticsTO p1 = userDao.find(to.getPlayer1()).getStatistics();
-		StatisticsTO p2 = userDao.find(to.getPlayer2()).getStatistics();
+		StatisticsTO p1 = userDao.findOne(to.getPlayer1().getId()).getStatistics();
+		StatisticsTO p2 = userDao.findOne(to.getPlayer2().getId()).getStatistics();
 		MatchTO base = calculateBase(calculateLvlGap(to, p1, p2), to);
 		MatchTO baseWithBonus = calculateBonus(base, p1, p2);
 		return baseWithBonus;

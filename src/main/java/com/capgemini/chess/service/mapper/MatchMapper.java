@@ -1,15 +1,17 @@
 package com.capgemini.chess.service.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
 
 import com.capgemini.chess.dataaccess.entities.MatchEntity;
 import com.capgemini.chess.service.to.MatchTO;
 
-
-public class MatchMapper {
+@Service
+public class MatchMapper implements Mapper<MatchEntity, MatchTO>{
 	
-	public static MatchTO map(MatchEntity entity) {
+	public MatchTO map2To(MatchEntity entity) {
 		if (entity != null) {
 			MatchTO to = new MatchTO();
 			to.setId(entity.getId());
@@ -23,7 +25,7 @@ public class MatchMapper {
 		return null;
 	}
 
-	public static MatchEntity map(MatchTO to) {
+	public MatchEntity map2Entity(MatchTO to) {
 		if (to != null) {
 			MatchEntity entity = new MatchEntity();
 			entity.setId(to.getId());
@@ -37,12 +39,20 @@ public class MatchMapper {
 		return null;
 	}
 
-	public static List<MatchTO> map2TOs(List<MatchEntity> entities) {
-		return entities.stream().map(MatchMapper::map).collect(Collectors.toList());
+	public List<MatchTO> map2TOs(List<MatchEntity> entities) {
+		List<MatchTO> tos = new ArrayList<MatchTO>();
+		for (MatchEntity u : entities) {
+			tos.add(map2To(u));
+		}
+		return tos;
 	}
 
-	public static List<MatchEntity> map2Entities(List<MatchTO> tos) {
-		return tos.stream().map(MatchMapper::map).collect(Collectors.toList());
+	public List<MatchEntity> map2Entities(List<MatchTO> tos) {
+		List<MatchEntity> entities = new ArrayList<MatchEntity>();
+		for (MatchTO u : tos) {
+			entities.add(map2Entity(u));
+		}
+		return entities;
 	}
 
 }

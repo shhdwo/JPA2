@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.capgemini.chess.dataaccess.dao.UserDao;
+import com.capgemini.chess.dataaccess.entities.UserEntity;
 import com.capgemini.chess.enums.Level;
 import com.capgemini.chess.enums.MatchWinner;
 import com.capgemini.chess.service.to.MatchTO;
@@ -30,8 +31,8 @@ public class LevelUpdateServiceImplTest {
 	public void shouldCalculateLevel() {
 		// given
 		MatchTO match = giveMatch();
-		Mockito.when(userDao.find(13L)).thenReturn(giveUser1());
-		Mockito.when(userDao.find(666L)).thenReturn(giveUser2());
+		Mockito.when(userDao.findOne(13L)).thenReturn(giveUser1());
+		Mockito.when(userDao.findOne(666L)).thenReturn(giveUser2());
 		// when
 		Map<String, Level> updatedLvls = service.updateLevel(match);
 		Level expected1 = Level.WEAKLING;
@@ -43,8 +44,12 @@ public class LevelUpdateServiceImplTest {
 	
 	private MatchTO giveMatch() {
 		MatchTO match = new MatchTO();
-		match.setPlayer1(13L);
-		match.setPlayer2(666L);
+		UserEntity player1 = new UserEntity();
+		player1.setId(13L);
+		UserEntity player2 = new UserEntity();
+		player2.setId(666L);
+		match.setPlayer1(player1);
+		match.setPlayer2(player2);
 		match.setResult(MatchWinner.PLAYER1);
 		match.setPoints1(1280);
 		match.setPoints2(-980);

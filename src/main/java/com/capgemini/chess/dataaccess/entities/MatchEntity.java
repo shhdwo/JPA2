@@ -1,14 +1,39 @@
 package com.capgemini.chess.dataaccess.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
 import com.capgemini.chess.enums.MatchWinner;
 
-public class MatchEntity {
+@NamedQuery(name="Match.findByUserId", query="SELECT m FROM MatchEntity m WHERE m.player1 = :id OR m.player2 = :id")
+@Entity
+@Table(name = "matches")
+public class MatchEntity extends AbstractEntity {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	private Long player1;
-	private Long player2;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private UserEntity player1;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private UserEntity player2;
+	
+	@Column(nullable=true)
 	private int points1;
+	
+	@Column(nullable=true)
 	private int points2;
+	
+	@Column(nullable=false)
 	private MatchWinner result;
 
 	public Long getId() {
@@ -19,19 +44,19 @@ public class MatchEntity {
 		this.id = id;
 	}
 
-	public Long getPlayer1() {
+	public UserEntity getPlayer1() {
 		return player1;
 	}
 
-	public void setPlayer1(Long player1) {
+	public void setPlayer1(UserEntity player1) {
 		this.player1 = player1;
 	}
 
-	public Long getPlayer2() {
+	public UserEntity getPlayer2() {
 		return player2;
 	}
 
-	public void setPlayer2(Long player2) {
+	public void setPlayer2(UserEntity player2) {
 		this.player2 = player2;
 	}
 

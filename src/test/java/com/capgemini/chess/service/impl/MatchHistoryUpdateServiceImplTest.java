@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.capgemini.chess.dataaccess.dao.MatchDao;
+import com.capgemini.chess.dataaccess.entities.UserEntity;
 import com.capgemini.chess.enums.MatchWinner;
 import com.capgemini.chess.service.to.MatchTO;
 
@@ -51,16 +52,20 @@ public class MatchHistoryUpdateServiceImplTest {
 		// then
 		Mockito.verify(matchDao).save(matchCaptor.capture());
 		Assert.assertEquals(expectedResult, matchCaptor.getValue().getResult());
-		Assert.assertEquals(expectedP1, matchCaptor.getValue().getPlayer1());
-		Assert.assertEquals(expectedP2, matchCaptor.getValue().getPlayer2());
+		Assert.assertEquals(expectedP1, matchCaptor.getValue().getPlayer1().getId());
+		Assert.assertEquals(expectedP2, matchCaptor.getValue().getPlayer2().getId());
 		Assert.assertEquals(expectedPoints1, matchCaptor.getValue().getPoints1());
 		Assert.assertEquals(expectedPoints2, matchCaptor.getValue().getPoints2());
 	}
 	
 	private MatchTO giveMatch() {
 		MatchTO match = new MatchTO();
-		match.setPlayer1(13L);
-		match.setPlayer2(666L);
+		UserEntity player1 = new UserEntity();
+		player1.setId(13L);
+		UserEntity player2 = new UserEntity();
+		player2.setId(666L);
+		match.setPlayer1(player1);
+		match.setPlayer2(player2);
 		match.setResult(MatchWinner.PLAYER1);
 		match.setPoints1(1280);
 		match.setPoints2(-980);

@@ -11,50 +11,59 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.capgemini.chess.dataaccess.dao.Dao;
+import com.capgemini.chess.service.mapper.Mapper;
 
 
 @Transactional(Transactional.TxType.SUPPORTS)
-public abstract class AbstractDao<T, K extends Serializable> implements Dao<T, K> {
+public abstract class AbstractDao<E, T, K extends Serializable> implements Dao<T, K> {
 
     @PersistenceContext
     protected EntityManager entityManager;
 
-    private Class<T> domainClass;
+    @Autowired
+    Mapper<E, T> mapper;
+    
+    private Class<E> domainClass;
 
     @Override
-    public T save(T entity) {
-        entityManager.persist(entity);
-        return entity;
+    public T save(T to) {
+        entityManager.persist(mapper.map2Entity(to));
+        return to;
     }
 
     @Override
     public T getOne(K id) {
-        return entityManager.getReference(getDomainClass(), id);
+        E entity = entityManager.getReference(getDomainClass(), id);
+        return mapper.map2To(entity);
     }
 
     @Override
     public T findOne(K id) {
-        return entityManager.find(getDomainClass(), id);
+        E entity = entityManager.find(getDomainClass(), id);
+        return mapper.map2To(entity);
     }
 
     @Override
     public List<T> findAll() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery = builder.createQuery(getDomainClass());
+        CriteriaQuery<E> criteriaQuery = builder.createQuery(getDomainClass());
         criteriaQuery.from(getDomainClass());
-        TypedQuery<T> query = entityManager.createQuery(criteriaQuery);
-        return query.getResultList();
+        TypedQuery<E> query = entityManager.createQuery(criteriaQuery);
+        return mapper.map2TOs(query.getResultList());
     }
 
     @Override
-    public T update(T entity) {
-        return entityManager.merge(entity);
+    public T update(T to) {
+        E entity = entityManager.merge(mapper.map2Entity(to));
+        return mapper.map2To(entity);
     }
 
     @Override
-    public void delete(T entity) {
-        entityManager.remove(entity);
+    public void delete(T to) {
+        entityManager.remove(mapper.map2Entity(to));
     }
 
     @Override
@@ -78,10 +87,10 @@ public abstract class AbstractDao<T, K extends Serializable> implements Dao<T, K
     }
 
     @SuppressWarnings("unchecked")
-    protected Class<T> getDomainClass() {
+    protected Class<E> getDomainClass() {
         if (domainClass == null) {
             ParameterizedType type = (ParameterizedType) getClass().getGenericSuperclass();
-            domainClass = (Class<T>) type.getActualTypeArguments()[0];
+            domainClass = (Class<E>) type.getActualTypeArguments()[0];
         }
         return domainClass;
     }

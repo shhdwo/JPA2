@@ -1,14 +1,17 @@
 package com.capgemini.chess.service.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
 
 import com.capgemini.chess.dataaccess.entities.StatisticsEntity;
 import com.capgemini.chess.service.to.StatisticsTO;
 
-public class StatisticsMapper {
+@Service
+public class StatisticsMapper implements Mapper<StatisticsEntity, StatisticsTO> {
 	
-	public static StatisticsTO map(StatisticsEntity entity) {
+	public StatisticsTO map2To(StatisticsEntity entity) {
 		if (entity != null) {
 			StatisticsTO to = new StatisticsTO();
 			to.setId(entity.getId());
@@ -23,7 +26,7 @@ public class StatisticsMapper {
 		return null;
 	}
 
-	public static StatisticsEntity map(StatisticsTO to) {
+	public StatisticsEntity map2Entity(StatisticsTO to) {
 		if (to != null) {
 			StatisticsEntity entity = new StatisticsEntity();
 			entity.setId(to.getId());
@@ -38,11 +41,19 @@ public class StatisticsMapper {
 		return null;
 	}
 
-	public static List<StatisticsTO> map2TOs(List<StatisticsEntity> entities) {
-		return entities.stream().map(StatisticsMapper::map).collect(Collectors.toList());
+	public List<StatisticsTO> map2TOs(List<StatisticsEntity> entities) {
+		List<StatisticsTO> tos = new ArrayList<StatisticsTO>();
+		for (StatisticsEntity u : entities) {
+			tos.add(map2To(u));
+		}
+		return tos;
 	}
 
-	public static List<StatisticsEntity> map2Entities(List<StatisticsTO> tos) {
-		return tos.stream().map(StatisticsMapper::map).collect(Collectors.toList());
+	public List<StatisticsEntity> map2Entities(List<StatisticsTO> tos) {
+		List<StatisticsEntity> entities = new ArrayList<StatisticsEntity>();
+		for (StatisticsTO u : tos) {
+			entities.add(map2Entity(u));
+		}
+		return entities;
 	}
 }

@@ -25,10 +25,10 @@ public class UserShowServiceImpl implements UserShowService {
 	@Override
 	public UserInfoTO showUser(Long id) {
 		UserInfoTO userInfo = new UserInfoTO();
-		UserTO userTO = userDao.find(id);
+		UserTO userTO = userDao.findOne(id);
 		List<UserTO> ranking = userDao.findAll();
 		ranking.sort(new PointsComparator());
-		List<MatchTO> history = matchDao.findById(id);
+		List<MatchTO> history = matchDao.findByUserId(id);
 		bindValues(userInfo, userTO, ranking, history);
 		printOutToConsole(userInfo, ranking, history);
 		return userInfo;

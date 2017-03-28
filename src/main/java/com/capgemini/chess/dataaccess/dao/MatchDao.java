@@ -4,12 +4,8 @@ import java.util.List;
 
 import com.capgemini.chess.service.to.MatchTO;
 
-public interface MatchDao {
-	
-	MatchTO save(MatchTO match);
+public interface MatchDao extends Dao<MatchTO, Long> {
 
-	List<MatchTO> findById(Long id);
-	
-	List<MatchTO> findAll();
+	List<MatchTO> findByUserId(Long id);
 
 }

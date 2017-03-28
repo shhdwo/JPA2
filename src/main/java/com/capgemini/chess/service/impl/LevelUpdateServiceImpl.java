@@ -21,8 +21,8 @@ public class LevelUpdateServiceImpl implements LevelUpdateService {
 
 	@Override
 	public Map<String, Level> updateLevel(MatchTO to) {
-		Long p1 = to.getPlayer1();
-		Long p2 = to.getPlayer2();
+		Long p1 = to.getPlayer1().getId();
+		Long p2 = to.getPlayer2().getId();
 		Level levelP1 = calculateLevel(p1, to.getPoints1());
 		Level levelP2 = calculateLevel(p2, to.getPoints2());
 		Map<String, Level> updatedLvls = new HashMap<>();
@@ -32,7 +32,7 @@ public class LevelUpdateServiceImpl implements LevelUpdateService {
 	}
 
 	private Level calculateLevel(Long p, int points) {
-		UserTO user = userDao.find(p);
+		UserTO user = userDao.findOne(p);
 		StatisticsTO userStats = user.getStatistics();
 		userStats = updateGameStats(points, userStats);
 		user.setStatistics(userStats);

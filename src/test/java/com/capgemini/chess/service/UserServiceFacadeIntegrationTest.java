@@ -1,11 +1,15 @@
 package com.capgemini.chess.service;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+
+import static org.fest.assertions.api.Assertions.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.capgemini.chess.ChessApplication;
 import com.capgemini.chess.dataaccess.dao.UserDao;
@@ -13,8 +17,9 @@ import com.capgemini.chess.service.to.RegistrationTO;
 import com.capgemini.chess.service.to.UpdateTO;
 import com.capgemini.chess.service.to.UserTO;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { ChessApplication.class })
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ChessApplication.class)
+@Transactional
 public class UserServiceFacadeIntegrationTest {
 
 	@Autowired
@@ -22,6 +27,15 @@ public class UserServiceFacadeIntegrationTest {
 
 	@Autowired
 	private UserDao dao;
+	
+	@Test
+	public void shouldFinduser() {
+		// given when
+		UserTO findOne = dao.findOne(1L);
+		
+		// then
+		assertThat(findOne.getEmail()).isEqualTo("email@example.com");
+	}
 
 	@Test
 	public void shouldRegisterNewUser() throws Exception {
@@ -32,7 +46,7 @@ public class UserServiceFacadeIntegrationTest {
 		UserTO user = service.register(registration);
 
 		// then
-		UserTO actual = dao.find(user.getId());
+		UserTO actual = dao.findOne(user.getId());
 		Assert.assertEquals(registration.getEmail(), actual.getEmail());
 		Assert.assertEquals(registration.getPassword(), actual.getPassword());
 		Assert.assertEquals(registration.getName(), actual.getProfile().getName());
@@ -50,7 +64,7 @@ public class UserServiceFacadeIntegrationTest {
 		UserTO user = service.update(update);
 		
 		// then
-		UserTO actual = dao.find(user.getId());
+		UserTO actual = dao.findOne(user.getId());
 		Assert.assertEquals(update.getAboutMe(), actual.getProfile().getAboutMe());
 		Assert.assertEquals(update.getLifeMotto(), actual.getProfile().getLifeMotto());
 		Assert.assertEquals(update.getName(), actual.getProfile().getName());
